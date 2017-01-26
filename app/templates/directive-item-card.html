@@ -1,0 +1,19 @@
+<div class="feed-item favorite">
+    <div class="item-thumb" ng-if="item.image.url != null">
+        <img src="{{item.image.url}}"/>
+    </div>
+    <div class="item-thumb" ng-if="item.image.url == null">
+        <img src="/img/phones/dell-streak-7.0.jpg"/>
+    </div>
+    <div class="item-content">
+        <p class="title">{{item.title}}</p>
+        <p class="date">{{item.date | parseDate | date:"dd/MM/yyyy" }}</p>
+        <!--div class="text-over">{{item.contentSnippet}}</div-->
+        <div class="share-box">
+            <span class="glyphicon glyphicon-star"></span>
+            <span class="glyphicon glyphicon-trash"></span>
+            <span class="glyphicon glyphicon-share"></span>
+            <a ui-sref="singleView({cat:category, entry:entry })"  class="btn btn-info">Read more</a>
+        </div>
+    </div><!--item-content-->
+</div><!--feed-item-->

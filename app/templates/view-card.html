@@ -1,0 +1,7 @@
+<div class="feeds-wrap">
+    <div ui-view="feed-controls"></div>
+    <div id="feeds" class="cards">        
+        <list-item type="card" item="item" cat="{{category}}" key="{{key}}" ng-repeat="(key, item) in news"></list-item>
+    </div><!--feeds-->
+</div><!--feeds-wrap-->
+                
