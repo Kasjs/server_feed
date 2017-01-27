@@ -40,3 +40,23 @@ module.exports.getParsedFeed = function(req, res) {
         });
     });
 }
+
+module.exports.addFeed = function(req, res) {
+    console.log(req.body);
+    Feed.findOne({ title: req.body.title }, function(error, feed) {
+        if(feed) {
+            res.send({
+                feed: feed
+            })
+        } else {
+            var feed = new Feed();
+            feed.title = req.body.title;
+            feed.entries = req.body.entries;
+            feed.markModified('entries');
+            feed.save();
+            return res.send({
+                feed: feed
+            });
+        }
+    });
+}

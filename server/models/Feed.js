@@ -1,10 +1,8 @@
 var mongoose = require('mongoose');
 
 var feedSchema = new mongoose.Schema({
-	title: String,
-	description: String,
-	link: String,
-	rsslink: String
+ title: {type: String, unique: true},
+ entries: {type: Array}
 });
 
 module.exports = mongoose.model('Feed', feedSchema);

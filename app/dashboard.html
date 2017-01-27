@@ -1,8 +1,8 @@
 <div class="row">
     <div class="col-md-10 col-md-offset-1 col-lg-6 col-lg-offset-3">
         <div class="add-feed">
-            <form name="feedForm" action="" class="form-horizontal">
-                <h3 class="text-center">New Feed</h3>                
+            <form name="feedForm" ng-submit="getFeedArticle()" class="form-horizontal">
+                <h3 class="text-center">New Feed</h3>
                 <div class="form-group">
                     <label for="url" class="col-sm-3 control-label">Url</label>
                     <div class="col-sm-7">
@@ -30,9 +30,9 @@
                     </div>
                 </div>
                 <div class="text-center">
-                    <button class="btn btn-primary" ng-click="getFeedArticle()">Add feed</button>
+                    <button type='submit' class="btn btn-primary">Add feed</button>
                     <!--button type="submit" class="btn btn-primary">Add feed</button-->
-                </div>                             
+                </div>
             </form>
         </div><!-- .add-feed -->
     </div>

@@ -1,8 +1,8 @@
 'use strict';
 
 //News feed controller
-rssReaderApp.controller('FeedLayoutCtrl', ['$scope','$stateParams','$location','feedService', function($scope, $stateParams,$location, feedService){    
-    $scope.category = $stateParams.cat;   
+rssReaderApp.controller('FeedLayoutCtrl', ['$scope','$stateParams','$location','feedService', function($scope, $stateParams,$location, feedService){
+    $scope.category = $stateParams.cat;
 
     $scope.removeFeedById = function(){
         //console.log('sadf');
@@ -15,7 +15,7 @@ rssReaderApp.controller('FeedLayoutCtrl', ['$scope','$stateParams','$location','
 //News feed controller
 rssReaderApp.controller('FeedListCtrl', ['$scope','$stateParams', 'feedService', function($scope, $stateParams, feedService){
 
-    $scope.category = $stateParams.cat;    
+    $scope.category = $stateParams.cat;
     var feed  = feedService.getFeedById($stateParams.cat);
     if(feed.length != 0){
         $scope.news = feed.entries;
@@ -38,17 +38,18 @@ rssReaderApp.controller('SidebarCtrl', ['$scope','$rootScope', 'feedService', fu
     $scope.titles = [];
     $rootScope.$on('data_shared',function(){
         $scope.titles = feedService.getCategoryArray();
-    })    
+    })
 }])
 
 //Dashboard page controller
-rssReaderApp.controller('DashboardCtrl', ['$scope', '$rootScope', '$location', 'feedService', function($scope, $rootScope, $location, feedService){        
-    $scope.feed = '';    
-    $scope.getFeedArticle = function() {            
+rssReaderApp.controller('DashboardCtrl', ['$scope', '$rootScope', '$location', 'feedService', function($scope, $rootScope, $location, feedService){
+    $scope.feed = '';
+    $scope.getFeedArticle = function() {
         feedService.getParsedFeed($scope.feedLink)
             .then(function(responce){
-                feedService.addFeedToCategoryList($scope.feedCategory, responce);                                    
-        });        
-    }    
+                feedService.addFeedToCategoryList($scope.feedCategory, responce);
+
+        });
+    }
 
 }])
