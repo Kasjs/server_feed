@@ -1,7 +1,7 @@
 'use strict';
 var express    = require('express'),
 	fs         = require("fs"),
-	mongoose = require('mongoose'),
+	mongoose   = require('mongoose'),
 	app        = express(),
 	session    = require('express-session'),
     cors       = require('cors'),
@@ -10,6 +10,11 @@ var express    = require('express'),
 	flash      = require('express-flash');
     require('./server/models/Feed');
 	var routes = require('./server/routes/index');
+
+mongoose.connect(process.env.DB_URL || 'mongodb://Kasjs:Mantrudevelop1985@ds027338.mlab.com:27338/learn_phrase_app');
+mongoose.connection.on('error', function(err) {
+    console.log('Error: Could not connect to MongoDB');
+});
 
 app.set('port', process.env.PORT || 3000);
 app.set('base url', process.env.URL || 'http://localhost');
@@ -29,10 +34,6 @@ app.use(express.static(__dirname + '/app'));
 app.use(express.static(__dirname + '/server'));
 app.use('/', routes);
 
-app.listen(app.get('port'), '0.0.0.0', function onStart(err) {
-    if (err) {
-        console.log(err);
-    }
-    console.info('Listening on port %s. Open up http://0.0.0.0:%s/ in your browser.', app.get('port'), app.get('port'));
-});
+app.listen(app.get('port'));
+
 module.exports = app;

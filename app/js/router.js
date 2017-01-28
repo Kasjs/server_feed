@@ -2,8 +2,9 @@
 
 var rssReaderApp = angular.module('rssReaderApp', ['ui.router']);
 
-rssReaderApp.config(['$stateProvider', '$urlRouterProvider',  function($stateProvider, $urlRouterProvider) {
+rssReaderApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',  function($stateProvider, $urlRouterProvider, $httpProvider) {
 	$urlRouterProvider.otherwise('/dashboard');
+
 	$stateProvider
 	.state('view-list', {
 		url:'/view-list?cat',

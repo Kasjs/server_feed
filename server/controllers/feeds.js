@@ -43,9 +43,9 @@ module.exports.getParsedFeed = function(req, res) {
 
 module.exports.addFeed = function(req, res) {
     console.log(req.body);
-    Feed.findOne({ title: req.body.title }, function(error, feed) {
+    Feed.find({ }, function(error, feed) {
         if(feed) {
-            res.send({
+            return res.send({
                 feed: feed
             })
         } else {
@@ -53,10 +53,14 @@ module.exports.addFeed = function(req, res) {
             feed.title = req.body.title;
             feed.entries = req.body.entries;
             feed.markModified('entries');
-            feed.save();
-            return res.send({
-                feed: feed
-            });
+            feed.save(function(err){
+				if (err) {
+					res.send({
+						err: "Error"
+					})
+				}
+				res.json(feed);
+			});
         }
     });
 }

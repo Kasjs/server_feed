@@ -10,7 +10,20 @@ rssReaderApp.factory('feedService', ['$http', '$rootScope','$timeout', function(
             });
     }
 
+    function getSavedFeed(entries, title) {
+        return $http.post('/addFeed', {entries: entries, title: title })
+            .then(function(res) {
+                console.log("response in getSavedFeed:", res);
+                return res;
+                addFeedToCategoryList(categoryName, res);
+            },
+            function(error) {
+                console.log('Can not get saved feed');
+            })
+    }
+
     function addFeedToCategoryList(categoryName, feedItem){
+
         var siteTitle = feedItem.feed[0].meta.title;
         var categoryIndex = categories.findIndex(function(item){
             return item.categoryName == categoryName;
@@ -57,16 +70,7 @@ rssReaderApp.factory('feedService', ['$http', '$rootScope','$timeout', function(
         console.log('Categories: ', categories);
     }
 
-    // function getSavedFeed(title, entries) {
-    //     return $http.post('/addFeed', {title: title, entries: entries})
-    //         .then(function(res) {
-    //             console.log("response in getSavedFeed:", res);
-    //             return res;
-    //         },
-    //         function(error) {
-    //             console.log('Can not get saved feed');
-    //         })
-    // }
+
 
     function getCategoryArray(){
         return categories;
@@ -92,7 +96,7 @@ rssReaderApp.factory('feedService', ['$http', '$rootScope','$timeout', function(
         addFeedToCategoryList : addFeedToCategoryList,
         getCategoryArray      : getCategoryArray,
         getFeedById           : getFeedById,
-        getFeedEntryById      : getFeedEntryById
-        // getSavedFeed          : getSavedFeed
+        getFeedEntryById      : getFeedEntryById,
+        getSavedFeed          : getSavedFeed
     }
 }])

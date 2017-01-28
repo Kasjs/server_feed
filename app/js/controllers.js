@@ -36,7 +36,7 @@ rssReaderApp.controller('SingleNewsCtrl', ['$scope','$stateParams','feedService'
 //Sidebar page controller
 rssReaderApp.controller('SidebarCtrl', ['$scope','$rootScope', 'feedService', function($scope, $rootScope, feedService){
     $scope.titles = [];
-    $rootScope.$on('data_shared',function(){
+    $rootScope.$on('data_shared', function(){
         $scope.titles = feedService.getCategoryArray();
     })
 }])
@@ -46,9 +46,8 @@ rssReaderApp.controller('DashboardCtrl', ['$scope', '$rootScope', '$location', '
     $scope.feed = '';
     $scope.getFeedArticle = function() {
         feedService.getParsedFeed($scope.feedLink)
-            .then(function(responce){
-                feedService.addFeedToCategoryList($scope.feedCategory, responce);
-
+            .then(function(res){
+                feedService.getSavedFeed(res, res.feed[0].meta.title);
         });
     }
 
