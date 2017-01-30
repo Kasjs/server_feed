@@ -43,7 +43,7 @@ module.exports.getParsedFeed = function(req, res) {
 
 module.exports.addFeed = function(req, res) {
     console.log(req.body);
-    Feed.find({ }, function(error, feed) {
+    Feed.findOne({title: req.body.title }, function(error, feed) {
         if(feed) {
             return res.send({
                 feed: feed
